@@ -5,7 +5,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com//"/>
-  <updated>2015-07-28T07:22:27.690Z</updated>
+  <updated>2015-07-28T07:42:08.739Z</updated>
   <id>http://yoursite.com//</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2015/07/28/%E4%B8%8D%E7%94%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1Objenesis/"/>
     <id>http://yoursite.com/2015/07/28/不用构造方法创建对象Objenesis/</id>
     <published>2015-07-28T07:22:19.000Z</published>
-    <updated>2015-07-28T07:22:27.690Z</updated>
+    <updated>2015-07-28T07:42:08.739Z</updated>
     <content type="html"><![CDATA[<h1 id="不用构造方法创建对象Objenesis">不用构造方法创建对象Objenesis</h1><p>标签（空格分隔）： Java基础-反射</p>
 <hr>
 <p>参考文章</p>
@@ -37,6 +37,8 @@
 <p><a href="http://www.oschina]]>
     </summary>
     
+      <category term="反射" scheme="http://yoursite.com/tags/%E5%8F%8D%E5%B0%84/"/>
+    
   </entry>
   
   <entry>
@@ -44,7 +46,7 @@
     <link href="http://yoursite.com/2015/07/28/Protostuff/"/>
     <id>http://yoursite.com/2015/07/28/Protostuff/</id>
     <published>2015-07-28T07:21:09.000Z</published>
-    <updated>2015-07-28T07:21:22.842Z</updated>
+    <updated>2015-07-28T07:45:41.398Z</updated>
     <content type="html"><![CDATA[<h1 id="Protostuff">Protostuff</h1><p>标签（空格分隔）： Java基础-序列化</p>
 <hr>
 <p>参考文档</p>
@@ -66,6 +68,8 @@
 <p><a href="http://dongliu.net/post/587142" tar]]>
     </summary>
     
+      <category term="序列化" scheme="http://yoursite.com/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    
   </entry>
   
   <entry>
@@ -73,7 +77,7 @@
     <link href="http://yoursite.com/2015/07/28/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"/>
     <id>http://yoursite.com/2015/07/28/动态代理/</id>
     <published>2015-07-28T07:20:01.000Z</published>
-    <updated>2015-07-28T07:20:15.756Z</updated>
+    <updated>2015-07-28T07:46:02.724Z</updated>
     <content type="html"><![CDATA[<h1 id="动态代理">动态代理</h1><p>标签（空格分隔）： Java基础-代理</p>
 <hr>
 <h2 id="说明">说明</h2><p>在Java中要想实现动态代理，则需要java.lang.reflect.InvocationHandler接口和java.lang.reflect.Proxy类的支持<br>InvocationHandler接口的定义如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
@@ -98,6 +102,8 @@
 <h2 id="说明">说明</h2><p>在Java中要想实现动态代理，则需要java.lang.reflect.InvocationHandler接口和java.la]]>
     </summary>
     
+      <category term="代理" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%90%86/"/>
+    
   </entry>
   
   <entry>
@@ -105,7 +111,7 @@
     <link href="http://yoursite.com/2015/07/28/Github%E6%90%AD%E5%BB%BABlog/"/>
     <id>http://yoursite.com/2015/07/28/Github搭建Blog/</id>
     <published>2015-07-28T07:16:27.000Z</published>
-    <updated>2015-07-28T07:17:32.404Z</updated>
+    <updated>2015-07-28T07:45:22.883Z</updated>
     <content type="html"><![CDATA[<h1 id="Github搭建Blog">Github搭建Blog</h1><p>标签（空格分隔）： Github使用</p>
 <hr>
 <h2 id="1、安装Github客户端">1、安装Github客户端</h2><p>这个比较简单，这里就不再赘述了</p>
@@ -135,6 +141,8 @@
 <h2 id]]>
     </summary>
     
+      <category term="Github使用" scheme="http://yoursite.com/tags/Github%E4%BD%BF%E7%94%A8/"/>
+    
   </entry>
   
   <entry>
@@ -142,7 +150,7 @@
     <link href="http://yoursite.com/2015/07/27/storm%E6%B5%8B%E8%AF%95/"/>
     <id>http://yoursite.com/2015/07/27/storm测试/</id>
     <published>2015-07-27T09:00:03.000Z</published>
-    <updated>2015-07-27T09:10:25.909Z</updated>
+    <updated>2015-07-28T07:45:51.604Z</updated>
     <content type="html"><![CDATA[<h1 id="storm测试">storm测试</h1><p>标签（空格分隔）： 云计算 storm</p>
 <hr>
 <blockquote>
@@ -162,6 +170,8 @@
 <blockquote>
 <p>参考文档：<a href="http://shiyanjun.cn/archives/934.html" target="_b]]>
     </summary>
+    
+      <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
     
   </entry>
   
