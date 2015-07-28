@@ -5,7 +5,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com//"/>
-  <updated>2015-07-27T09:07:03.732Z</updated>
+  <updated>2015-07-28T07:22:27.690Z</updated>
   <id>http://yoursite.com//</id>
   
   <author>
@@ -16,14 +16,123 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[study]]></title>
-    <link href="http://yoursite.com/2015/07/27/study/"/>
-    <id>http://yoursite.com/2015/07/27/study/</id>
-    <published>2015-07-27T09:07:03.000Z</published>
-    <updated>2015-07-27T09:07:03.732Z</updated>
-    <content type="html"></content>
+    <title><![CDATA[不用构造方法创建对象Objenesis]]></title>
+    <link href="http://yoursite.com/2015/07/28/%E4%B8%8D%E7%94%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1Objenesis/"/>
+    <id>http://yoursite.com/2015/07/28/不用构造方法创建对象Objenesis/</id>
+    <published>2015-07-28T07:22:19.000Z</published>
+    <updated>2015-07-28T07:22:27.690Z</updated>
+    <content type="html"><![CDATA[<h1 id="不用构造方法创建对象Objenesis">不用构造方法创建对象Objenesis</h1><p>标签（空格分隔）： Java基础-反射</p>
+<hr>
+<p>参考文章</p>
+<blockquote>
+<p><a href="http://www.oschina.net/p/objenesis/" target="_blank" rel="external">http://www.oschina.net/p/objenesis/</a></p>
+</blockquote>
+<p>如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？</p>
+]]></content>
     <summary type="html">
+    <![CDATA[<h1 id="不用构造方法创建对象Objenesis">不用构造方法创建对象Objenesis</h1><p>标签（空格分隔）： Java基础-反射</p>
+<hr>
+<p>参考文章</p>
+<blockquote>
+<p><a href="http://www.oschina]]>
+    </summary>
     
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Protostuff]]></title>
+    <link href="http://yoursite.com/2015/07/28/Protostuff/"/>
+    <id>http://yoursite.com/2015/07/28/Protostuff/</id>
+    <published>2015-07-28T07:21:09.000Z</published>
+    <updated>2015-07-28T07:21:22.842Z</updated>
+    <content type="html"><![CDATA[<h1 id="Protostuff">Protostuff</h1><p>标签（空格分隔）： Java基础-序列化</p>
+<hr>
+<p>参考文档</p>
+<blockquote>
+<p><a href="http://dongliu.net/post/587142" target="_blank" rel="external">http://dongliu.net/post/587142</a></p>
+</blockquote>
+<p>Google的protobuf是一个优秀的序列化工具，跨语言、快速、序列化后体积小。</p>
+<p>protobuf的一个缺点是需要数据结构的预编译过程，首先要编写.proto格式的配置文件，再通过protobuf提供的工具生成各种语言响应的代码。由于java具有反射和动态代码生成的能力，这个预编译过程不是必须的，可以在代码执行时来实现。有个<a href="http://code.google.com/p/protostuff/" target="_blank" rel="external">protostuff</a>已经实现了这个功能。</p>
+<p>protostuff基于Google protobuf，但是提供了更多的功能和更简易的用法。其中，protostuff-runtime实现了无需预编译对java bean进行protobuf序列化/反序列化的能力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Schema schema = RuntimeSchema.getSchema(Foo.class);</span><br><span class="line">LinkedBuffer buffer = getApplicationBuffer();</span><br><span class="line"></span><br><span class="line"><span class="comment">//serialize</span></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] protostuff = ProtostuffIOUtil.toByteArray(foo, schema, buffer);</span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    buffer.clear();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//deserialize</span></span><br><span class="line">Foo f = <span class="keyword">new</span> Foo();</span><br><span class="line">ProtostuffIOUtil.mergaFrom(protostuff, f, schema);</span><br></pre></td></tr></table></figure>
+<p>protostuff-runtime的局限是序列化前需预先传入schema，反序列化不负责对象的创建只负责复制，因而必须提供默认构造函数。此外，protostuff还可以按照protobuf的配置序列化生成json/yaml/xml等格式。</p>
+<p>完整的工具类如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.objenesis.Objenesis;</span><br><span class="line"><span class="keyword">import</span> org.objenesis.ObjenesisStd;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dyuproject.protostuff.LinkedBuffer;</span><br><span class="line"><span class="keyword">import</span> com.dyuproject.protostuff.ProtostuffIOUtil;</span><br><span class="line"><span class="keyword">import</span> com.dyuproject.protostuff.Schema;</span><br><span class="line"><span class="keyword">import</span> com.dyuproject.protostuff.runtime.RuntimeSchema;</span><br><span class="line"><span class="keyword">import</span> com.lxz.rpc.sample.client.Person;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * 序列化工具类（基于Protostuff实现）</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializationUtil</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Class&lt;?&gt;, Schema&lt;?&gt;&gt; cachedSchema = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Objenesis objenesis = <span class="keyword">new</span> ObjenesisStd(<span class="keyword">true</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">SerializationUtil</span><span class="params">()</span></span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span>&lt;T&gt; Schema&lt;T&gt; <span class="title">getSchema</span><span class="params">(Class&lt;T&gt; cls)</span></span>&#123;</span><br><span class="line">		Schema&lt;T&gt; schema = (Schema&lt;T&gt;) cachedSchema.get(cls);</span><br><span class="line">		<span class="keyword">if</span>(schema == <span class="keyword">null</span>)&#123;</span><br><span class="line">			schema = RuntimeSchema.createFrom(cls);</span><br><span class="line">			<span class="keyword">if</span>(schema != <span class="keyword">null</span>)&#123;</span><br><span class="line">				cachedSchema.put(cls, schema);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> schema;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span><br><span class="line">	 * 序列化（对象-&gt;字节数组）</span><br><span class="line">	 * @param 传入需要序列化的对象</span><br><span class="line">	 * @return 返回给序列化后的字节数组</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span>&lt;T&gt; <span class="keyword">byte</span>[] serialize(T obj)&#123;</span><br><span class="line">		Class&lt;T&gt; cls = (Class&lt;T&gt;) obj.getClass();</span><br><span class="line">		LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			Schema&lt;T&gt; schema = getSchema(cls);</span><br><span class="line">			<span class="keyword">return</span> ProtostuffIOUtil.toByteArray(obj, schema, buffer);</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(e.getMessage(), e);</span><br><span class="line">		&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">			buffer.clear();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span><br><span class="line">	 * 反序列化（字节数组-&gt;对象）</span><br><span class="line">	 * @param data 传入序列化后的数组</span><br><span class="line">	 * @param cls 传入需要反序列化的类</span><br><span class="line">	 * @return 返回序列化后的对象</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">deserialize</span><span class="params">(<span class="keyword">byte</span>[] data, Class&lt;T&gt; cls)</span></span>&#123;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			T message = (T) objenesis.newInstance(cls);</span><br><span class="line">			Schema&lt;T&gt; schema = getSchema(cls);</span><br><span class="line">			ProtostuffIOUtil.mergeFrom(data, message, schema);</span><br><span class="line">			<span class="keyword">return</span> message;</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(e.getMessage(), e);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		Person beforeSerPerson = <span class="keyword">new</span> Person(<span class="string">"Alexa"</span>, <span class="string">"Cloudera"</span>);<span class="comment">//创建对象</span></span><br><span class="line">		<span class="keyword">byte</span>[] tmp = SerializationUtil.serialize(beforeSerPerson);<span class="comment">//对其进行序列化</span></span><br><span class="line">		Person afterSerPerson = (Person)SerializationUtil.deserialize(tmp, Person.class);<span class="comment">//对其反序列化</span></span><br><span class="line">		System.out.println(afterSerPerson.getFirstName() + <span class="string">" "</span> + afterSerPerson.getLastName());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Protostuff">Protostuff</h1><p>标签（空格分隔）： Java基础-序列化</p>
+<hr>
+<p>参考文档</p>
+<blockquote>
+<p><a href="http://dongliu.net/post/587142" tar]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[动态代理]]></title>
+    <link href="http://yoursite.com/2015/07/28/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"/>
+    <id>http://yoursite.com/2015/07/28/动态代理/</id>
+    <published>2015-07-28T07:20:01.000Z</published>
+    <updated>2015-07-28T07:20:15.756Z</updated>
+    <content type="html"><![CDATA[<h1 id="动态代理">动态代理</h1><p>标签（空格分隔）： Java基础-代理</p>
+<hr>
+<h2 id="说明">说明</h2><p>在Java中要想实现动态代理，则需要java.lang.reflect.InvocationHandler接口和java.lang.reflect.Proxy类的支持<br>InvocationHandler接口的定义如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>在此接口中只定义了一个<code>invoke()</code>方法，此方法有三个参数，其参数的含义如下：</p>
+<ul>
+<li>Object proxy:被代理的对象</li>
+<li>Method method:要调用的方法</li>
+<li>Object args[]:方法调用时所需的参数</li>
+</ul>
+<p>Proxy类是专门完成代理的操作类，可以通过此类为一个或多个接口动态地生成实现类。Proxy类提供了如下的操作方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">newProxyInstance</span><span class="params">(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span> <span class="keyword">throws</span> IllegalArgumentException</span></span><br></pre></td></tr></table></figure></p>
+<p>通过newProxyInstance()方法可以动态地生成实现类，在此方法中的参数意义如下：</p>
+<ul>
+<li>ClassLoader loader:类加载器</li>
+<li>Class&lt;?&gt;[] interfaces:得到全部的接口</li>
+<li>InvocationHandler h:得到InvocationHandler接口的子类实例</li>
+</ul>
+<p>下面是一个实例:</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="动态代理">动态代理</h1><p>标签（空格分隔）： Java基础-代理</p>
+<hr>
+<h2 id="说明">说明</h2><p>在Java中要想实现动态代理，则需要java.lang.reflect.InvocationHandler接口和java.la]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Github搭建Blog]]></title>
+    <link href="http://yoursite.com/2015/07/28/Github%E6%90%AD%E5%BB%BABlog/"/>
+    <id>http://yoursite.com/2015/07/28/Github搭建Blog/</id>
+    <published>2015-07-28T07:16:27.000Z</published>
+    <updated>2015-07-28T07:17:32.404Z</updated>
+    <content type="html"><![CDATA[<h1 id="Github搭建Blog">Github搭建Blog</h1><p>标签（空格分隔）： Github使用</p>
+<hr>
+<h2 id="1、安装Github客户端">1、安装Github客户端</h2><p>这个比较简单，这里就不再赘述了</p>
+<h2 id="2、安装Node-js">2、安装Node.js</h2><p>下载Node.js，官网网址：</p>
+<blockquote>
+<p><a href="https://nodejs.org/download/" target="_blank" rel="external">https://nodejs.org/download/</a></p>
+</blockquote>
+<p>安装完成之后配置环境变量：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">变量名：<span class="built_in">Path</span></span><br><span class="line">变量值：;C:\Program Files\nodejs\node_modules\npm</span><br></pre></td></tr></table></figure></p>
+<h2 id="3、安装hexo">3、安装hexo</h2><p>进入git shell，输入以下命令：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure></p>
+<p>安装完成之后，在文件夹<code>C:\Users\lxz\Documents\GitHub\hexo</code>下初始化hexo，执行以下命令：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
+<p>安装依赖包：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
+<p>本地查看<br>现在我们已经搭建起本地的hexo博客了，执行以下命令，然后到浏览器输入<a href="http://127.0.0.1:4000看看" target="_blank" rel="external">http://127.0.0.1:4000看看</a><br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure></p>
+<h2 id="4、更改主题">4、更改主题</h2><h3 id="4-1、安装">4.1、安装</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br></pre></td></tr></table></figure>
+<h3 id="4-2、配置">4.2、配置</h3><p>修改hexo根目录下的_config.yml : theme: yilia</p>
+<h3 id="4-3、更新">4.3、更新</h3><p>进入themes目录<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> themes/yilia</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-4、配置">4.4、配置</h3><p>主题配置文件在主目录下的_config.xml:<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># Header</span><br><span class="line"><span class="function">menu:</span><br><span class="line">  主页: /</span><br><span class="line">  所有文章: /<span class="title">archives</span></span><br><span class="line">  # 随笔: /<span class="title">tags</span>/随笔</span><br><span class="line"></span><br><span class="line"># <span class="title">SubNav</span></span><br><span class="line"><span class="title">subnav</span>:</span><br><span class="line">  <span class="title">github</span>: "<span class="title">https</span>://<span class="title">github.com</span>/<span class="title">litten</span>"</span><br><span class="line">  <span class="title">weibo</span>: "<span class="title">http</span>://<span class="title">weibo.com</span>/<span class="title">litten225</span>"</span><br><span class="line">  <span class="title">rss</span>: "<span class="title">http</span>://<span class="title">feed.feedsky.com</span>/<span class="title">litten</span>"</span><br><span class="line">  # <span class="title">facebook</span>: "/"</span><br><span class="line">  # <span class="title">google</span>: "/"</span><br><span class="line">  # <span class="title">twitter</span>: "/"</span><br><span class="line">  # <span class="title">linkedin</span>: "/"</span><br><span class="line"></span><br><span class="line"><span class="title">rss</span>: /<span class="title">atom.xml</span></span><br><span class="line"></span><br><span class="line"># <span class="title">Content</span></span><br><span class="line"><span class="title">excerpt_link</span>: <span class="title">more</span></span><br><span class="line"><span class="title">fancybox</span>: <span class="title">true</span></span><br><span class="line"></span><br><span class="line"># <span class="title">Miscellaneous</span></span><br><span class="line"></span><br><span class="line"><span class="title">favicon</span>: /<span class="title">favicon.png</span></span><br><span class="line"></span><br><span class="line"><span class="title">avatar</span>: "<span class="title">https</span>://<span class="title">avatars2.githubusercontent.com</span>/<span class="title">u</span>/9530759?<span class="title">v</span>=3&amp;<span class="title">s</span>=460"</span><br><span class="line"><span class="title">share</span>: <span class="title">true</span></span><br><span class="line"><span class="title">duoshuo</span>: <span class="title">true</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Tips">Tips</h2><p>hexo支持更加简单的命令格式，比如：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo g == hexo generate</span><br><span class="line">hexo d == hexo deploy</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo n == hexo new</span><br></pre></td></tr></table></figure></p>
+<p>参考文档：</p>
+<blockquote>
+<p><a href="http://jingyan.baidu.com/article/d8072ac47aca0fec95cefd2d.html" target="_blank" rel="external">http://jingyan.baidu.com/article/d8072ac47aca0fec95cefd2d.html</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Github搭建Blog">Github搭建Blog</h1><p>标签（空格分隔）： Github使用</p>
+<hr>
+<h2 id="1、安装Github客户端">1、安装Github客户端</h2><p>这个比较简单，这里就不再赘述了</p>
+<h2 id]]>
     </summary>
     
   </entry>
