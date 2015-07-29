@@ -3,36 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>不用构造方法创建对象Objenesis | Lxz-Blog</title>
+  <title>ZooKeeper解读二（配置参数说明） | Lxz-Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不用构造方法创建对象Objenesis标签（空格分隔）： Java基础-反射
+  <meta name="description" content="ZooKeeper解读二（配置参数说明）标签（空格分隔）： 云计算-ZooKeeper
 
-参考文章
-
-http://www.oschina.net/p/objenesis/
-
-如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？">
+ZooKeeper配置文件的参数说明dataDir用于存放内存数据库快照的文件夹，同时用于集群的myid文件也存在这个文件夹里。
+dataLogDir用于单独设置transaction log的目录，transaction log分离可以避免和普通的log还有快照的竞争。
+clientPort客户端监听端口">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不用构造方法创建对象Objenesis">
-<meta property="og:url" content="http://yoursite.com/2015/07/28/不用构造方法创建对象Objenesis/index.html">
+<meta property="og:title" content="ZooKeeper解读二（配置参数说明）">
+<meta property="og:url" content="http://yoursite.com/2015/07/29/ZooKeeper解读二（配置参数说明）/index.html">
 <meta property="og:site_name" content="Lxz-Blog">
-<meta property="og:description" content="不用构造方法创建对象Objenesis标签（空格分隔）： Java基础-反射
+<meta property="og:description" content="ZooKeeper解读二（配置参数说明）标签（空格分隔）： 云计算-ZooKeeper
 
-参考文章
-
-http://www.oschina.net/p/objenesis/
-
-如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？">
-<meta property="og:updated_time" content="2015-07-28T09:04:15.255Z">
+ZooKeeper配置文件的参数说明dataDir用于存放内存数据库快照的文件夹，同时用于集群的myid文件也存在这个文件夹里。
+dataLogDir用于单独设置transaction log的目录，transaction log分离可以避免和普通的log还有快照的竞争。
+clientPort客户端监听端口">
+<meta property="og:updated_time" content="2015-07-29T07:53:19.498Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不用构造方法创建对象Objenesis">
-<meta name="twitter:description" content="不用构造方法创建对象Objenesis标签（空格分隔）： Java基础-反射
+<meta name="twitter:title" content="ZooKeeper解读二（配置参数说明）">
+<meta name="twitter:description" content="ZooKeeper解读二（配置参数说明）标签（空格分隔）： 云计算-ZooKeeper
 
-参考文章
-
-http://www.oschina.net/p/objenesis/
-
-如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？">
+ZooKeeper配置文件的参数说明dataDir用于存放内存数据库快照的文件夹，同时用于集群的myid文件也存在这个文件夹里。
+dataLogDir用于单独设置transaction log的目录，transaction log分离可以避免和普通的log还有快照的竞争。
+clientPort客户端监听端口">
   
     <link rel="alternative" href="/atom.xml" title="Lxz-Blog" type="application/atom+xml">
   
@@ -225,11 +219,11 @@ http://www.oschina.net/p/objenesis/
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-不用构造方法创建对象Objenesis" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ZooKeeper解读二（配置参数说明）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/28/不用构造方法创建对象Objenesis/" class="article-date">
-  	<time datetime="2015-07-28T07:22:19.000Z" itemprop="datePublished">2015-07-28</time>
+      <a href="/2015/07/29/ZooKeeper解读二（配置参数说明）/" class="article-date">
+  	<time datetime="2015-07-29T07:52:53.000Z" itemprop="datePublished">2015-07-29</time>
 </a>
     </div>
   
@@ -242,7 +236,7 @@ http://www.oschina.net/p/objenesis/
         
   
     <h1 class="article-title" itemprop="name">
-      不用构造方法创建对象Objenesis
+      ZooKeeper解读二（配置参数说明）
     </h1>
   
 
@@ -251,7 +245,7 @@ http://www.oschina.net/p/objenesis/
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li></ul>
 	</div>
 
         
@@ -262,13 +256,26 @@ http://www.oschina.net/p/objenesis/
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="不用构造方法创建对象Objenesis">不用构造方法创建对象Objenesis</h1><p>标签（空格分隔）： Java基础-反射</p>
+        <h1 id="ZooKeeper解读二（配置参数说明）">ZooKeeper解读二（配置参数说明）</h1><p>标签（空格分隔）： 云计算-ZooKeeper</p>
 <hr>
-<p>参考文章</p>
-<blockquote>
-<p><a href="http://www.oschina.net/p/objenesis/" target="_blank" rel="external">http://www.oschina.net/p/objenesis/</a></p>
-</blockquote>
-<p>如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？</p>
+<h1 id="ZooKeeper配置文件的参数说明">ZooKeeper配置文件的参数说明</h1><p><strong>dataDir</strong><br>用于存放内存数据库快照的文件夹，同时用于集群的myid文件也存在这个文件夹里。</p>
+<p><strong>dataLogDir</strong><br>用于单独设置transaction log的目录，transaction log分离可以避免和普通的log还有快照的竞争。</p>
+<p><strong>clientPort</strong><br>客户端监听端口</p>
+<p><strong>globalOutstandingLimit</strong><br>client请求队列的最大长度，防止内存溢出，默认值为1000</p>
+<p><strong>preAllocSize</strong><br>预分配的Transaction log空间block为proAllocSize KB，默认block为64M，一般不需要更改，除非snapshot过于频繁。</p>
+<p><strong>snapCount</strong><br>在snapCount个snapshot后写一次transaction log，默认值是100,000。</p>
+<p><strong>traceFile</strong><br>用于记录请求的log，打开会影响性能，用于debug，最好不要定义</p>
+<p><strong>maxClientCnxns</strong><br>最大并发客户端数，用于防止DOS的，默认值是10，设置为0是不加限制。</p>
+<p><strong>clientPortBindAddress</strong><br>可以设置指定的client ip以及端口，不设置的话等于ANY:clientPort</p>
+<p><strong>minSessionTimeout</strong><br>最小的客户端session超时时间，默认值为2个tickTime，单位是毫秒</p>
+<p><strong>maxSessionTimeout</strong><br>最大的客户端session超时时间，默认值为20个tickTime，单位是毫秒</p>
+<p><strong>electionAlg</strong><br>用于选举的实现的参数，0为以原始的基于UDP的方式协作，1为不进行用户验证的基于UDP的快速选举，2为进行用户验证的基于UDP的快速选举，3为基于TCP的快速选举，默认值为3.</p>
+<p><strong>initLimit</strong><br>多少个tickTime内，允许其他server连接并初始化数据，如果zookeeper管理的数据较大，则应相应增大这个值。</p>
+<p><strong>syncLimit</strong><br>多少个tickTime内，允许follower同步，如果follower落后太多，则会被丢弃。</p>
+<p><strong>leaderServes</strong><br>leader是否接受客户端连接。默认值为yes。leader负责协调更新。当更新吞吐量远高于读取吞吐量时，可以设置为不接受客户端连接，以便leader可以专注于同步协调工作。</p>
+<p><strong>server.x=[hostname]:nnnnn[:nnnnn]</strong><br>配置集群里面的主机信息，其中server.x的x要写在myid文件中，决定当前机器的id，第一个port用于连接leader，第二个用于leader选举。如果electionAlg为0，则不需要第二个port。hostname也可以填ip。</p>
+<p><strong>group.x=nnnnn[:nnnnn]</strong><br>分组信息，表明哪个组有哪些节点，例如group.1=1:2:3 group.2=4:5:6 group.3=7:8:9。</p>
+<p><strong>weight.x=nnnnn</strong><br>权重信息，表明哪个节点的权重是多少，例如weight.1=1 weight.2=1 weight.3=1。</p>
 
       
     </div>
@@ -278,18 +285,18 @@ http://www.oschina.net/p/objenesis/
     
 <nav id="article-nav">
   
-    <a href="/2015/07/29/ZooKeeper解读一（单节点搭建）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/07/29/ZooKeeper解读三（系统和角色）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          ZooKeeper解读一（单节点搭建）
+          ZooKeeper解读三（系统和角色）
         
       </div>
     </a>
   
   
-    <a href="/2015/07/28/Protostuff/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Protostuff</div>
+    <a href="/2015/07/29/ZooKeeper解读一（单节点搭建）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ZooKeeper解读一（单节点搭建）</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -318,7 +325,7 @@ http://www.oschina.net/p/objenesis/
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="不用构造方法创建对象Objenesis" data-title="不用构造方法创建对象Objenesis" data-url="http://yoursite.com/2015/07/28/不用构造方法创建对象Objenesis/"></div>
+	<div class="ds-thread" data-thread-key="ZooKeeper解读二（配置参数说明）" data-title="ZooKeeper解读二（配置参数说明）" data-url="http://yoursite.com/2015/07/29/ZooKeeper解读二（配置参数说明）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ZooKeeper解读三（系统和角色） | Lxz-Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ZooKeeper解读三（系统和角色）标签（空格分隔）： 云计算-ZooKeeper
+
+1、系统架构zookeeper分为服务器端（server）和客户端（client），客户端可以连接到整个zookeeper服务的任何服务器上（除非leaderServers参数被显示设置，leader不允许接收客户端连接）。客户端使用并维护一个TCP连接，通过这个连接发送请求，接受响应，获取观察的事件以及发送心">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZooKeeper解读三（系统和角色）">
+<meta property="og:url" content="http://yoursite.com/2015/07/29/ZooKeeper解读三（系统和角色）/index.html">
+<meta property="og:site_name" content="Lxz-Blog">
+<meta property="og:description" content="ZooKeeper解读三（系统和角色）标签（空格分隔）： 云计算-ZooKeeper
+
+1、系统架构zookeeper分为服务器端（server）和客户端（client），客户端可以连接到整个zookeeper服务的任何服务器上（除非leaderServers参数被显示设置，leader不允许接收客户端连接）。客户端使用并维护一个TCP连接，通过这个连接发送请求，接受响应，获取观察的事件以及发送心">
+<meta property="og:updated_time" content="2015-07-29T07:54:25.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZooKeeper解读三（系统和角色）">
+<meta name="twitter:description" content="ZooKeeper解读三（系统和角色）标签（空格分隔）： 云计算-ZooKeeper
+
+1、系统架构zookeeper分为服务器端（server）和客户端（client），客户端可以连接到整个zookeeper服务的任何服务器上（除非leaderServers参数被显示设置，leader不允许接收客户端连接）。客户端使用并维护一个TCP连接，通过这个连接发送请求，接受响应，获取观察的事件以及发送心">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxz-Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars2.githubusercontent.com/u/9530759?v=3&amp;s=460" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Alexa Cloudera</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/Java基础">Java基础</a></li>
+				        
+							<li><a href="/tags/storm">云计算-storm</a></li>
+				        
+							<li><a href="/tags/ZooKeeper">云计算-ZooKeeper</a></li>
+				        
+							<li><a href="/tags/Github使用">工具</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Github使用/" style="font-size: 10px;">Github使用</a> <a href="/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/tags/ZooKeeper/" style="font-size: 20px;">ZooKeeper</a> <a href="/tags/storm/" style="font-size: 10px;">storm</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Alexa Cloudera</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars2.githubusercontent.com/u/9530759?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Alexa Cloudera</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/Java基础">Java基础</a></li>
+		        
+					<li><a href="/tags/storm">云计算-storm</a></li>
+		        
+					<li><a href="/tags/ZooKeeper">云计算-ZooKeeper</a></li>
+		        
+					<li><a href="/tags/Github使用">工具</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-ZooKeeper解读三（系统和角色）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/29/ZooKeeper解读三（系统和角色）/" class="article-date">
+  	<time datetime="2015-07-29T07:53:48.000Z" itemprop="datePublished">2015-07-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ZooKeeper解读三（系统和角色）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ZooKeeper解读三（系统和角色）">ZooKeeper解读三（系统和角色）</h1><p>标签（空格分隔）： 云计算-ZooKeeper</p>
+<hr>
+<h2 id="1、系统架构">1、系统架构</h2><p>zookeeper分为服务器端（server）和客户端（client），客户端可以连接到整个zookeeper服务的任何服务器上（除非leaderServers参数被显示设置，leader不允许接收客户端连接）。客户端使用并维护一个TCP连接，通过这个连接发送请求，接受响应，获取观察的事件以及发送心跳。如果这个TCP连接中断，客户端自动尝试连接到另外的zookeeper服务器。客户端第一次连接到zookeeper服务时，接受这个连接的zookeeper服务器会为这个客户端建立一个会话。当这个客户端连接到另外的服务器时，这个会话会被新的服务器重新建立。</p>
+<p>在org.apache.zookeeper.Watcher中定义了Event.KeeperState类型，用于表示client和server之间的状态，包括：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Unused, this state is never generated by the server */</span></span><br><span class="line"><span class="annotation">@Deprecated</span></span><br><span class="line">Unknown (-<span class="number">1</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/** The client is in the disconnected state - it is not connected</span><br><span class="line"> * to any server in the ensemble. */</span></span><br><span class="line">Disconnected (<span class="number">0</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Unused, this state is never generated by the server */</span></span><br><span class="line"><span class="annotation">@Deprecated</span></span><br><span class="line">NoSyncConnected (<span class="number">1</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/** The client is in the connected state - it is connected</span><br><span class="line"> * to a server in the ensemble (one of the servers specified</span><br><span class="line"> * in the host connection parameter during ZooKeeper client</span><br><span class="line"> * creation). */</span></span><br><span class="line">SyncConnected (<span class="number">3</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Auth failed state</span><br><span class="line"> */</span></span><br><span class="line">AuthFailed (<span class="number">4</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * The client is connected to a read-only server, that is the</span><br><span class="line"> * server which is not currently connected to the majority.</span><br><span class="line"> * The only operations allowed after receiving this state is</span><br><span class="line"> * read operations.</span><br><span class="line"> * This state is generated for read-only clients only since</span><br><span class="line"> * read/write clients aren't allowed to connect to r/o servers.</span><br><span class="line"> */</span></span><br><span class="line">ConnectedReadOnly (<span class="number">5</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">  * SaslAuthenticated: used to notify clients that they are SASL-authenticated,</span><br><span class="line">  * so that they can perform Zookeeper actions with their SASL-authorized permissions.</span><br><span class="line">  */</span></span><br><span class="line">SaslAuthenticated(<span class="number">6</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">/** The serving cluster has expired this session. The ZooKeeper</span><br><span class="line"> * client connection (the session) is no longer valid. You must</span><br><span class="line"> * create a new client connection (instantiate a new ZooKeeper</span><br><span class="line"> * instance) if you with to access the ensemble. */</span></span><br><span class="line">Expired (-<span class="number">112</span>);</span><br></pre></td></tr></table></figure></p>
+<p>需要注意session机制。client连接server成功后，server赋予该client一个sessionid。client需要不断发送心跳维持session有效，在session有效期内，可以使用zookeeper提供的API进行操作。如果因为某些原因导致client无法正常发送心跳，在超时时长后，server会判断该client的session失效，此时client发送的任何操作都会被拒绝，并触发ExpiredException异常，此时KeeperState处于Expired状态。</p>
+<p>但client有自动重连server的机制，如果client的心跳无法正常连接server，会在session超时前尝试连接其他server，连接成功后可以继续操作。</p>
+<p>如果client取消当前连接并连接其他server，已存在的watches会丢失，取而代之的是client会生成一个特殊WatchEvent告诉本地watcher连接已经丢失，该WatchEvent是：EventType.None，KeeperState.DisConnected。<strong>本地watcher接收到该WatchEvent后会怎样？</strong></p>
+<h2 id="2、server角色">2、server角色</h2><p>启动zookeeper服务器集群环境后，多个zookeeper服务器在工作前会选举出一个Leader。选举出Leader前，所有server不区分角色，都需要平等参与投票（observer除外，不参与投票）；选主过程完成后，存在以下几种角色：</p>
+<ul>
+<li>leader：领导者，可以接受client请求，也接受其他server转发的写请求，负责更新系统状态。</li>
+<li>follower：可以接收client请求，如果是写请求将转发给leader来更新系统zhuangtai。</li>
+<li>observer：同follower，唯一区别就是不参与选主过程。</li>
+</ul>
+<p><code>org.apache.zookeeper.quorum.QuorumPeer</code>定义了server的类型，其中ServerState表示server类型，leanerType表示当ServerState为FOLLOWING时是参与者还是观察者，前者称为follower，后者称为observer。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ServerState &#123;</span><br><span class="line">    LOOKING, FOLLOWING, LEADING, OBSERVING;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * A peer can either be participating, which implies that it is willing to</span><br><span class="line"> * both vote in instances of consensus and to elect or become a Leader, or</span><br><span class="line"> * it may be observing in which case it isn't.</span><br><span class="line"> * </span><br><span class="line"> * We need this distinction to decide which ServerState to move to when </span><br><span class="line"> * conditions change (e.g. which state to become after LOOKING). </span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> LearnerType &#123;</span><br><span class="line">    PARTICIPANT, OBSERVER;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * To enable observers to have no identifier, we need a generic identifier</span><br><span class="line"> * at least for QuorumCnxManager. We use the following constant to as the</span><br><span class="line"> * value of such a generic identifier. </span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/29/ZooKeeper解读二（配置参数说明）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ZooKeeper解读二（配置参数说明）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ZooKeeper解读三（系统和角色）" data-title="ZooKeeper解读三（系统和角色）" data-url="http://yoursite.com/2015/07/29/ZooKeeper解读三（系统和角色）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Alexa Cloudera
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

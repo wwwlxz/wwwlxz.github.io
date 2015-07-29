@@ -3,36 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>不用构造方法创建对象Objenesis | Lxz-Blog</title>
+  <title>ZooKeeper解读一（单节点搭建） | Lxz-Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不用构造方法创建对象Objenesis标签（空格分隔）： Java基础-反射
+  <meta name="description" content="ZooKeeper解读一（单节点搭建）标签（空格分隔）： 云计算-ZooKeeper
 
-参考文章
+ZooKeeper单节点的搭建ZooKeeper的搭建还是比较简单的，所需要修改的配置文件比较少，而且也不容易出错。
+1、获取ZooKeeper安装包并解压从官网上下载ZooKeeper的安装包，我这里下载的版本是zookeeper-3.4.6.tar.gz，对其进行解压，我这里的安装目录为：
 
-http://www.oschina.net/p/objenesis/
-
-如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？">
+/home/z">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不用构造方法创建对象Objenesis">
-<meta property="og:url" content="http://yoursite.com/2015/07/28/不用构造方法创建对象Objenesis/index.html">
+<meta property="og:title" content="ZooKeeper解读一（单节点搭建）">
+<meta property="og:url" content="http://yoursite.com/2015/07/29/ZooKeeper解读一（单节点搭建）/index.html">
 <meta property="og:site_name" content="Lxz-Blog">
-<meta property="og:description" content="不用构造方法创建对象Objenesis标签（空格分隔）： Java基础-反射
+<meta property="og:description" content="ZooKeeper解读一（单节点搭建）标签（空格分隔）： 云计算-ZooKeeper
 
-参考文章
+ZooKeeper单节点的搭建ZooKeeper的搭建还是比较简单的，所需要修改的配置文件比较少，而且也不容易出错。
+1、获取ZooKeeper安装包并解压从官网上下载ZooKeeper的安装包，我这里下载的版本是zookeeper-3.4.6.tar.gz，对其进行解压，我这里的安装目录为：
 
-http://www.oschina.net/p/objenesis/
-
-如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？">
-<meta property="og:updated_time" content="2015-07-28T09:04:15.255Z">
+/home/z">
+<meta property="og:updated_time" content="2015-07-29T07:52:19.761Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不用构造方法创建对象Objenesis">
-<meta name="twitter:description" content="不用构造方法创建对象Objenesis标签（空格分隔）： Java基础-反射
+<meta name="twitter:title" content="ZooKeeper解读一（单节点搭建）">
+<meta name="twitter:description" content="ZooKeeper解读一（单节点搭建）标签（空格分隔）： 云计算-ZooKeeper
 
-参考文章
+ZooKeeper单节点的搭建ZooKeeper的搭建还是比较简单的，所需要修改的配置文件比较少，而且也不容易出错。
+1、获取ZooKeeper安装包并解压从官网上下载ZooKeeper的安装包，我这里下载的版本是zookeeper-3.4.6.tar.gz，对其进行解压，我这里的安装目录为：
 
-http://www.oschina.net/p/objenesis/
-
-如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？">
+/home/z">
   
     <link rel="alternative" href="/atom.xml" title="Lxz-Blog" type="application/atom+xml">
   
@@ -225,11 +222,11 @@ http://www.oschina.net/p/objenesis/
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-不用构造方法创建对象Objenesis" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ZooKeeper解读一（单节点搭建）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/28/不用构造方法创建对象Objenesis/" class="article-date">
-  	<time datetime="2015-07-28T07:22:19.000Z" itemprop="datePublished">2015-07-28</time>
+      <a href="/2015/07/29/ZooKeeper解读一（单节点搭建）/" class="article-date">
+  	<time datetime="2015-07-29T07:51:51.000Z" itemprop="datePublished">2015-07-29</time>
 </a>
     </div>
   
@@ -242,7 +239,7 @@ http://www.oschina.net/p/objenesis/
         
   
     <h1 class="article-title" itemprop="name">
-      不用构造方法创建对象Objenesis
+      ZooKeeper解读一（单节点搭建）
     </h1>
   
 
@@ -251,7 +248,7 @@ http://www.oschina.net/p/objenesis/
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li></ul>
 	</div>
 
         
@@ -262,13 +259,25 @@ http://www.oschina.net/p/objenesis/
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="不用构造方法创建对象Objenesis">不用构造方法创建对象Objenesis</h1><p>标签（空格分隔）： Java基础-反射</p>
+        <h1 id="ZooKeeper解读一（单节点搭建）">ZooKeeper解读一（单节点搭建）</h1><p>标签（空格分隔）： 云计算-ZooKeeper</p>
 <hr>
-<p>参考文章</p>
+<h1 id="ZooKeeper单节点的搭建">ZooKeeper单节点的搭建</h1><p>ZooKeeper的搭建还是比较简单的，所需要修改的配置文件比较少，而且也不容易出错。</p>
+<h2 id="1、获取ZooKeeper安装包并解压">1、获取ZooKeeper安装包并解压</h2><p>从官网上下载ZooKeeper的安装包，我这里下载的版本是<code>zookeeper-3.4.6.tar.gz</code>，对其进行解压，我这里的安装目录为：</p>
 <blockquote>
-<p><a href="http://www.oschina.net/p/objenesis/" target="_blank" rel="external">http://www.oschina.net/p/objenesis/</a></p>
+<p>/home/zookeeper</p>
 </blockquote>
-<p>如果一个类没有参数为空的构造方法时候，那么你直接调用newInstance方法试图得到一个实例对象的时候会抛出异常的。能不能有办法绕过构造方法来实例化一个对象呢？</p>
+<p>解压命令：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf zookeeper-<span class="number">3</span>.<span class="number">4</span>.<span class="number">6</span>.tar.gz</span><br></pre></td></tr></table></figure></p>
+<h2 id="2、修改配置文件zoo-cfg">2、修改配置文件zoo.cfg</h2><p>进入<code>/home/zookeeper/zookeeper-3.4.6/conf</code>目录<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> zoo_sample.cfg zoo.cfg</span><br><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></figure></p>
+<p>对zoo.cfg做如下修改：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># The number of milliseconds of each tick&#10;tickTime=2000&#10;# The number of ticks that the initial &#10;# synchronization phase can take&#10;initLimit=5&#10;# The number of ticks that can pass between &#10;# sending a request and getting an acknowledgement&#10;syncLimit=2&#10;# the directory where the snapshot is stored.&#10;# do not use /tmp for storage, /tmp here is just &#10;# example sakes.&#10;dataDir=/home/zookeeper/zookeeper-3.4.6/data&#10;# the port at which the clients will connect&#10;clientPort=2181&#10;# the maximum number of client connections.&#10;# increase this if you need to handle more clients&#10;#maxClientCnxns=60&#10;#&#10;# Be sure to read the maintenance section of the &#10;# administrator guide before turning on autopurge.&#10;#&#10;# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance&#10;#&#10;# The number of snapshots to retain in dataDir&#10;#autopurge.snapRetainCount=3&#10;# Purge task interval in hours&#10;# Set to &#34;0&#34; to disable auto purge feature&#10;#autopurge.purgeInterval=1</span><br></pre></td></tr></table></figure></p>
+<p>然后在<code>/home/zookeeper/zookeeper-3.4.6/</code>目录下创建data文件夹：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/zookeeper/zookeeper-<span class="number">3</span>.<span class="number">4</span>.<span class="number">6</span>/data</span><br></pre></td></tr></table></figure></p>
+<h2 id="3、启动server">3、启动server</h2><p>进入目录<code>/home/zookeeper/zookeeper-3.4.6/bin</code>，执行如下命令<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh <span class="built_in">start</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="4、查看进程是否启动">4、查看进程是否启动</h2><p>有两种方法查看进程是否启动</p>
+<ol>
+<li>jps<br>如果有<code>QuorumPeerMain</code>进程则表示ZooKeeper启动。</li>
+<li>./zkServer.sh status<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JMX enabled by default</span><br><span class="line">Using config: /home/zookeeper/zookeeper-<span class="number">3</span>.<span class="number">4</span>.<span class="number">6</span>/bin/../conf/zoo.cfg</span><br><span class="line"><span class="function">Mode: <span class="title">standalone</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中<code>standalone</code>表示ZooKeeper是单节点启动的。</p>
 
       
     </div>
@@ -278,18 +287,18 @@ http://www.oschina.net/p/objenesis/
     
 <nav id="article-nav">
   
-    <a href="/2015/07/29/ZooKeeper解读一（单节点搭建）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/07/29/ZooKeeper解读二（配置参数说明）/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          ZooKeeper解读一（单节点搭建）
+          ZooKeeper解读二（配置参数说明）
         
       </div>
     </a>
   
   
-    <a href="/2015/07/28/Protostuff/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Protostuff</div>
+    <a href="/2015/07/28/不用构造方法创建对象Objenesis/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">不用构造方法创建对象Objenesis</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -318,7 +327,7 @@ http://www.oschina.net/p/objenesis/
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="不用构造方法创建对象Objenesis" data-title="不用构造方法创建对象Objenesis" data-url="http://yoursite.com/2015/07/28/不用构造方法创建对象Objenesis/"></div>
+	<div class="ds-thread" data-thread-key="ZooKeeper解读一（单节点搭建）" data-title="ZooKeeper解读一（单节点搭建）" data-url="http://yoursite.com/2015/07/29/ZooKeeper解读一（单节点搭建）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
